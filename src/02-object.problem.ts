@@ -3,8 +3,16 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
-const PersonResult = z.unknown();
-//                   ^ 🕵️‍♂️
+/* Problem
+  const PersonResult = z.unknown();
+*/
+
+// My solution
+// Created an object using z.object()
+
+const PersonResult = z.object({
+  name: z.string()
+});
 
 export const fetchStarWarsPersonName = async (id: string) => {
   const data = await fetch(

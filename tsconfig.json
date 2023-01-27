@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
     "types": [
-      "vitest/importMeta"
+      "vitest/globals",
+      "istanbul-lib-coverage",
+      "istanbul-lib-report",
+      "istanbul-reports",
+      "stack-utils",
+      "yargs",
+      "yargs-parser"
     ],
     /* Visit https://aka.ms/tsconfig to read more about this file */
     /* Projects */

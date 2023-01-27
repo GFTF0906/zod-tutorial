@@ -3,15 +3,23 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
+/* Problem
+  const Form = z.object({
+    name: z.string(),
+    phoneNumber: z.string(),
+  });
+*/
+
+// My solution
+// I made 'phoneNumber' be optional with the .optional().
+
 const Form = z.object({
   name: z.string(),
-  phoneNumber: z.string(),
-  //                     ^ 🕵️‍♂️
+  phoneNumber: z.string().optional(),
 });
 
 export const validateFormInput = (values: unknown) => {
   const parsedData = Form.parse(values);
-
   return parsedData;
 };
 

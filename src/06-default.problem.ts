@@ -3,10 +3,19 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
+/* Problem
+  const Form = z.object({
+    repoName: z.string(),
+    keywords: z.array(z.string()).optional(),
+  });
+*/
+
+// My solution
+// Added a default value to keywords ([] -> empty array)
+
 const Form = z.object({
   repoName: z.string(),
-  keywords: z.array(z.string()).optional(),
-  //                           ^ 🕵️‍♂️
+  keywords: z.array(z.string()).optional().default([]),
 });
 
 export const validateFormInput = (values: unknown) => {

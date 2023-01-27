@@ -7,8 +7,14 @@ const StarWarsPerson = z.object({
   name: z.string(),
 });
 
-const StarWarsPeopleResults = z.unknown();
-//                            ^ 🕵️‍♂️
+/* Problem
+  const StarWarsPeopleResults = z.unknown();
+*/
+
+// My solution
+// Created a object with an array of 'StarWarsPerson' inside.
+
+const StarWarsPeopleResults = z.object({ results: z.array(StarWarsPerson) });
 
 export const fetchStarWarsPeople = async () => {
   const data = await fetch(

@@ -3,15 +3,24 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
-const MenuItem = z.object({
-  //             ^ 🕵️‍♂️
+/* Problem 
+  const MenuItem = z.object({
+    link: z.string(),
+    label: z.string(),
+    children: z.array(MenuItem).default([]),
+  });
+*/
+
+const BaseSchema = z.object({
   link: z.string(),
   label: z.string(),
-  children: z.array(MenuItem).default([]),
+})
+
+const MenuItem: z.ZodType<z.infer<typeof BaseSchema>> = BaseSchema.extend({
+    children: z.lazy(() => MenuItem).array().default([]),
 });
 
 // TESTS
-
 it("Should succeed when it encounters a correct structure", async () => {
   const menuItem = {
     link: "/",

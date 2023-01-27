@@ -16,19 +16,27 @@ const doesStarWarsPersonExist = async (id: string) => {
   }
 };
 
+/* Problem
+  const Form = z.object({
+    id: z.string(),
+  });
+*/
+
+// My solution
+// I used the helper function above to see if person exists by id and used the refine method to send an error message in case the person does not exist.
+
 const Form = z.object({
   id: z.string(),
-  //           ^ 🕵️‍♂️
+}).refine((props) => doesStarWarsPersonExist(props.id), {
+  message: 'Not found'
 });
 
 export const validateFormInput = async (values: unknown) => {
   const parsedData = await Form.parseAsync(values);
-
   return parsedData;
 };
 
 // TESTS
-
 it("Should fail if the star wars person does not exist", async () => {
   await expect(
     validateFormInput({

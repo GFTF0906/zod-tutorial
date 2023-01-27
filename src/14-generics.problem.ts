@@ -4,8 +4,18 @@ import { it } from "vitest";
 import { z } from "zod";
 import { Equal, Expect } from "./helpers/type-utils";
 
-const genericFetch = (url: string, schema: z.ZodSchema) => {
-  //                 ^ 🕵️‍♂️
+/* Problem 
+  const genericFetch = (url: string, schema: z.ZodSchema) => {
+    return fetch(url)
+      .then((res) => res.json())
+      .then((result) => schema.parse(result));
+  };
+*/
+
+// My solution
+// Added generic to function and to z.ZodSchema
+
+const genericFetch = <T>(url: string, schema: z.ZodSchema<T>) => {
   return fetch(url)
     .then((res) => res.json())
     .then((result) => schema.parse(result));
